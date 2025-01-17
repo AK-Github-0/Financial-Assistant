@@ -15,7 +15,7 @@ This project uses the `vllm` library to load and run large language models (LLMs
 
 1. **Clone the Repository**
    ```bash
-   git clone (https://github.com/AK-Github-0/Financial-Assistant/blob/main/README.md)
+   git clone https://github.com/AK-Github-0/Financial-Assistant/blob/main/README.md
    ```
 
 2. **Create and Activate Virtual Environment**
