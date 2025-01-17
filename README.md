@@ -1,4 +1,4 @@
-# LLM Chatbot with Docker Support
+# Financial Assistant
 
 This project uses the `vllm` library to load and run large language models (LLMs) like Facebook's OPT for generating text responses. Docker support ensures consistent deployment across environments.
 
@@ -15,8 +15,7 @@ This project uses the `vllm` library to load and run large language models (LLMs
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/llm-chatbot.git
-   cd llm-chatbot
+   git clone (https://github.com/AK-Github-0/Financial-Assistant/blob/main/README.md)
    ```
 
 2. **Create and Activate Virtual Environment**
@@ -40,17 +39,17 @@ This project uses the `vllm` library to load and run large language models (LLMs
 
 1. **Build the Docker Image**
    ```bash
-   docker build -t llm-chatbot .
+   docker build -t Financial-Assistant .
    ```
 
 2. **Run the Docker Container**
    ```bash
-   docker run -it --rm llm-chatbot
+   docker run -it --rm Financial-Assistant
    ```
 
 3. **Optional:** Run with Port Mapping (if serving via API)
    ```bash
-   docker run -it --rm -p 8000:8000 llm-chatbot
+   docker run -it --rm -p 8000:8000 Financial-Assistant
    ```
 
 ## Project Structure
@@ -62,28 +61,6 @@ This project uses the `vllm` library to load and run large language models (LLMs
 └── README.md
 ```
 
-## Dockerfile (Example)
-```Dockerfile
-FROM python:3.9-slim
 
-WORKDIR /app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-CMD ["python", "main.py"]
-```
-
-## Troubleshooting
-- **SSL Warning:** `NotOpenSSLWarning` due to LibreSSL. Install OpenSSL 1.1.1+ if needed.
-- **Device Error:** Use `device="cpu"` if no GPU is detected.
-
-## License
-This project is licensed under the MIT License.
-
----
-
-**Happy coding!** 🚀
 
