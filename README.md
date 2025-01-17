@@ -1,153 +1,89 @@
-# Financial-Asssistant
+# LLM Chatbot with Docker Support
 
-This project leverages advanced language models to generate text-based responses. It integrates efficient model handling using vLLM and offers flexibility in model selection, including lightweight models for CPU execution.
+This project uses the `vllm` library to load and run large language models (LLMs) like Facebook's OPT for generating text responses. Docker support ensures consistent deployment across environments.
 
----
+## Features
+- Fast and efficient text generation using `vllm`
+- Supports models like `facebook/opt-125m`
+- Dockerized setup for easy deployment
 
-## 📂 Project Structure
-
-```
-├── main.py             # Entry point of the application
-├── llm.py              # Model loading and response generation
-├── requirements.txt    # Python dependencies
-├── README.md           # Project documentation
-└── .venv/              # Python virtual environment
-```
-
----
-
-## 🛠 Installation
-
-1. **Clone the Repository:**
-
-```bash
-git clone https://github.com/your-username/ai-text-generation.git
-cd ai-text-generation
-```
-
-2. **Set Up Virtual Environment:**
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-3. **Install Dependencies:**
-
-```bash
-pip install -r requirements.txt
-```
-
-4. **Install OpenSSL (MacOS users):**
-
-```bash
-brew install openssl
-```
-
----
-
-## 🚀 Running the Project
-
-### **Run the App:**
-
-```bash
-python main.py
-```
-
----
-
-## ⚙️ Configuration
-
-### **Model Configuration (llm.py):**
-
-```python
-from vllm import LLM
-
-llm = LLM(
-    model="facebook/opt-125m",
-    device="cpu",
-    enforce_eager=True,
-    disable_log_stats=True  # Disable async logging for stability
-)
-```
-
----
-
-## 📝 Usage
-
-### **Generating Responses:**
-
-```python
-from llm import generate_response
-
-prompt = "Tell me a story about AI."
-response = generate_response(prompt)
-print(response)
-```
-
----
-
-## 🐞 Troubleshooting
-
-### **Common Issues:**
-
-1. **LibreSSL Warning:**
-   - Install OpenSSL: `brew install openssl`
-
-2. **NotImplementedError:**
-   - Set `disable_log_stats=True` in `llm.py`.
-
-3. **Async Output Errors:**
-   - Replace vLLM with Hugging Face Transformers if needed.
-
----
-
-## 📦 Dependencies
-
+## Prerequisites
 - Python 3.9+
-- vLLM
-- Transformers
-- PyTorch
+- Docker installed and running
 
-Install all dependencies with:
+## Local Setup (Without Docker)
 
-```bash
-pip install -r requirements.txt
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-username/llm-chatbot.git
+   cd llm-chatbot
+   ```
+
+2. **Create and Activate Virtual Environment**
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate  # For macOS/Linux
+   .venv\Scripts\activate     # For Windows
+   ```
+
+3. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run the Application**
+   ```bash
+   python main.py
+   ```
+
+## Running with Docker
+
+1. **Build the Docker Image**
+   ```bash
+   docker build -t llm-chatbot .
+   ```
+
+2. **Run the Docker Container**
+   ```bash
+   docker run -it --rm llm-chatbot
+   ```
+
+3. **Optional:** Run with Port Mapping (if serving via API)
+   ```bash
+   docker run -it --rm -p 8000:8000 llm-chatbot
+   ```
+
+## Project Structure
+```
+├── Dockerfile
+├── llm.py
+├── main.py
+├── requirements.txt
+└── README.md
 ```
 
----
+## Dockerfile (Example)
+```Dockerfile
+FROM python:3.9-slim
 
-## 🤝 Contributing
+WORKDIR /app
 
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature-branch`)
-3. Commit changes (`git commit -m 'Add new feature'`)
-4. Push to the branch (`git push origin feature-branch`)
-5. Open a Pull Request
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
----
+COPY . .
 
-## 📜 License
+CMD ["python", "main.py"]
+```
 
-Distributed under the MIT License. See `LICENSE` for more information.
+## Troubleshooting
+- **SSL Warning:** `NotOpenSSLWarning` due to LibreSSL. Install OpenSSL 1.1.1+ if needed.
+- **Device Error:** Use `device="cpu"` if no GPU is detected.
 
----
-
-## 💬 Contact
-
-**Abdullah Khan**  
-📧 Email: abdullah@example.com  
-🔗 LinkedIn: [linkedin.com/in/abdullahkhan](https://linkedin.com/in/abdullahkhan)
+## License
+This project is licensed under the MIT License.
 
 ---
 
-## 🌟 Acknowledgments
-
-- [vLLM](https://github.com/vllm-project/vllm)
-- [Hugging Face Transformers](https://huggingface.co/docs/transformers)
-
----
-
-**Give this project a ⭐ if you find it useful!**
-
+**Happy coding!** 🚀
 
